@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Cidade</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    
+    h1 {
+        text-align: center;
+    }
+    
+    form {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 8px;
+    }
+    
+    input,
+    textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+    }
+    
+    button {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+    <h1>Cadastro de Cidade</h1>
+
+    <form method="post" action="{% url 'cadastro_cidade' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Cadastrar Cidade</button>
+    </form>
+
+</body>
+</html>
