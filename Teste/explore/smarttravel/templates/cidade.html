@@ -75,27 +75,37 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             {% for categoria in categorias %}
             <li class="nav-item">
-              <a class="nav-link" href="/cidade/{{cidade.nome_cidade}}?categoria={{categoria.categorias}}"
-                >{{categoria.categorias}}</a>
+              <a
+                class="nav-link"
+                href="/cidade/{{cidade.nome_cidade}}?categoria={{categoria.categorias}}"
+              >
+                {{categoria.categorias}}
+              </a>
             </li>
             {% endfor %}
           </ul>
+          <div class="nav-item">
+            <form method="GET">
+              <input type="text" name="q" placeholder="Pesquisar locais" />
+              <button type="submit">Pesquisar</button>
+            </form>
+          </div>
         </div>
       </div>
     </nav>
 
-    <br>
+    <br />
     <h1>Cidade</h1>
-    {{cidade.nome_cidade}} 
-    
-    {% for local in locais %}
-    
+    {{cidade.nome_cidade}} {% for local in locais %}
+
     <div class="card">
       <a href="{% url 'local' local_id=local.id %}">
         <h2 class="card-title">{{local.nome_local}}</h2>
         <p class="card-description">Descrição</p>
       </a>
     </div>
+    {% empty %}
+    <p>Nenhum local encontrado.</p>
     {% endfor %}
   </body>
 </html>

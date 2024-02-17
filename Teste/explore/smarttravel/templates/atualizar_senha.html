@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Atualize  o seu cadastro</title>
+  </head>
+  <body>
+  <divclass='container'>
+    <div class='row'>
+      <div class="col-md-6 offset-md-3">
+        <button type="button" onclick="history.back()">Voltar</button>
+        <br />
+        <h1>Atualizar Senha do usuário</h1>
+        <br />
+        <form method="POST" action="{% url 'atualizar_senha' %}">
+          {% csrf_token %} {{ form.as_p }}
+          <br />
+          <button type="submit" class="btn btn-secondary">Atualizar Senha</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  </body>
+</html>

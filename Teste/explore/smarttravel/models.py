@@ -4,6 +4,7 @@ from django.db import models
 class Cidade(models.Model):
     nome_cidade = models.SlugField(max_length=254, verbose_name='cidade', unique=True)
     descricao = models.TextField(verbose_name='descrição')
+    imagem = models.ImageField(upload_to="imagens/", blank=True)
 
     def __str__(self):
         return self.nome_cidade
@@ -27,5 +28,6 @@ class Local(models.Model):
     email = models.EmailField(max_length=254, verbose_name='Email', blank=True)
     tipo = models.ForeignKey(Categorias, on_delete=models.CASCADE, null=True, blank=True, related_name='locais')
     id = models.AutoField(primary_key=True)
+    imagem = models.ImageField(upload_to='local', verbose_name='Imagem', blank=True)
 
 

@@ -2,8 +2,12 @@ from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .forms import CadastroCidadeForm, CadastroLocalForm, SignUpForm
+from .forms import CadastroCidadeForm, CadastroLocalForm, SignUpForm, UpdateuserForm, UpdatePasswordForm
 from smarttravel.models import Categorias, Cidade, Local
+
+
+# Paginação
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def home(request):
@@ -46,15 +50,20 @@ def cadastro_cidades(request):
 
 
 def cidade(request, city_slug):
-    if request.method == 'GET':
-        cidade = Cidade.objects.get(nome_cidade=city_slug)
-        categorias = Categorias.objects.all()
-        categoria = request.GET.get('categoria')
-        if categoria is None:
-            local = cidade.local.all()
-        else:
-            local = Local.objects.filter(cidade__nome_cidade=city_slug, tipo__categorias=categoria)
-        return render(request, "cidade.html", {'cidade':cidade, 'locais':local, 'categorias':categorias})
+    cidade = get_object_or_404(Cidade, nome_cidade=city_slug)
+    categorias = Categorias.objects.all()
+    categoria_selecionada = request.GET.get('categoria')
+    termo_pesquisa = request.GET.get('q')
+
+    locais = cidade.local.all()
+
+    if categoria_selecionada:
+        locais = locais.filter(tipo__categorias=categoria_selecionada)
+
+    if termo_pesquisa:
+        locais = locais.filter(nome_local__icontains=termo_pesquisa)
+
+    return render(request, "cidade.html", {'cidade': cidade, 'locais': locais, 'categorias': categorias, 'categoria_selecionada': categoria_selecionada, 'termo_pesquisa': termo_pesquisa})
     
 
 def login_user(request):
@@ -97,3 +106,47 @@ def cadastro_usuario(request):
             return redirect('cadastro_usuario')
 
     return render(request, 'cadastro_usuario.html', {'form':form})
+
+
+def atualizar_usuario(request):
+    if request.user.is_authenticated:
+        usuario_atual = User.objects.get(id=request.user.id)
+        usuario_form = UpdateuserForm(request.POST or None, instance=usuario_atual)
+        if usuario_form.is_valid():
+            usuario_form.save()
+
+            login(request, usuario_atual)
+            messages.success(request, 'Usuário Atualizado Com Sucesso!')
+            return redirect('home')
+        return render(request, 'atualizar_usuario.html', {'usuario_form':usuario_form})
+
+    else:
+        messages.error(request, 'Faça login para poder modificar sua conta!')
+        return redirect(request, 'login.html')
+    
+    return render(request, 'atualizar_usuario.html', {})
+
+
+def atualizar_senha(request):
+    if request.user.is_authenticated:
+        usuario_atual = request.user
+        if request.method == 'POST':
+            # Asalto
+            form = UpdatePasswordForm(usuario_atual, request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Senha alterada com sucesso")
+                login(request, usuario_atual)
+                return redirect('home')
+            else: 
+                for error in list(form.errors.values()):
+                    messages.error(request, error)
+                    return redirect('atualizar_senha')
+        else:
+            form = UpdatePasswordForm(usuario_atual)
+        return render(request, 'atualizar_senha.html', {'form': form})
+    
+    else:
+        messages.success(request, "Você precisa estar logado para mudar sua senha")
+        return redirect('home')
+    
