@@ -1,38 +1,25 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>{{ local.nome_local }}</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-      }
+{% extends 'base.html' %} 
 
-      h1 {
-        color: #333;
-      }
+{% block content %}
 
-      .info {
-        max-width: 600px;
-        margin: auto;
-      }
+<h1>{{ local.nome_local }}</h1>
+<div class="info">
+  <p><strong>Descrição:</strong> {{ local.descricao }}</p>
+  <p><strong>Categoria:</strong> {{ local.tipo }}</p>
+  <p><strong>Cidade:</strong> {{ local.cidade }}</p>
+  <p><strong>Bairro:</strong> {{ local.bairro }}</p>
+  <p><strong>Rua:</strong> {{ local.rua }}</p>
+  <p><strong>Telefone:</strong> {{ local.telefone }}</p>
+  <p><strong>Email:</strong> {{ local.email }}</p>
+  <!-- Adicione outros campos conforme necessário -->
+</div>
+<!-- Botões para editar e excluir o registro -->
+<div class="actions">
+<!-- Adicione outras informações do local aqui -->
+<form action="{% url 'adicionar_ao_roteiro' local.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Adicionar ao Roteiro</button>
+</form>
 
-      .info p {
-        margin-bottom: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>{{ local.nome_local }}</h1>
-    <div class="info">
-      <p><strong>Descrição:</strong> {{ local.descricao }}</p>
-      <p><strong>Categoria:</strong> {{ local.tipo }}</p>
-      <p><strong>Cidade:</strong> {{ local.cidade }}</p>
-      <p><strong>Bairro:</strong> {{ local.bairro }}</p>
-      <p><strong>Rua:</strong> {{ local.rua }}</p>
-      <p><strong>Telefone:</strong> {{ local.telefone }}</p>
-      <p><strong>Email:</strong> {{ local.email }}</p>
-      <!-- Adicione outros campos conforme necessário -->
-    </div>
-  </body>
-</html>
+
+{% endblock %}

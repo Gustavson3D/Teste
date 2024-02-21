@@ -1,5 +1,6 @@
 from django.db import models
-    
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 class Cidade(models.Model):
     nome_cidade = models.SlugField(max_length=254, verbose_name='cidade', unique=True)
@@ -31,3 +32,16 @@ class Local(models.Model):
     imagem = models.ImageField(upload_to='local', verbose_name='Imagem', blank=True)
 
 
+class Perfil(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    data_modificacao = models.DateTimeField(User, auto_now=True)
+    telefone = models.CharField(max_length=14, blank=True)
+
+
+class Roteiro(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    local = models.ForeignKey(Local, on_delete=models.CASCADE)
+    # Adicione outros campos conforme necessário
+
+    def __str__(self):
+        return f'Roteiro de {self.usuario.username} para {self.local.nome}'
