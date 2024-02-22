@@ -1,0 +1,82 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<h1>{{ local.nome_local }}</h1>
+<div class="info">
+  <p><strong>Descrição:</strong> {{ local.descricao }}</p>
+  <p><strong>Categoria:</strong> {{ local.tipo }}</p>
+  <p><strong>Cidade:</strong> {{ local.cidade }}</p>
+  <p><strong>Bairro:</strong> {{ local.bairro }}</p>
+  <p><strong>Rua:</strong> {{ local.rua }}</p>
+  <p><strong>Telefone:</strong> {{ local.telefone }}</p>
+  <p><strong>Email:</strong> {{ local.email }}</p>
+  <!-- Adicione outros campos conforme necessário -->
+</div>
+<!-- Botões para editar e excluir o registro -->
+<button type="button" data-local-id="{{ local.id }}" class="btn btn-secondary" id="add-cart">
+  Adicionar
+</button>
+
+{% comment %} <script>
+  $(document).on('click', '#add-cart', function(e){
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: '{% url "cart_add" %}',
+      data: {
+        product_id: $('#add-cart').attr('value'),
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        action: 'post'
+      },
+      success: function(json){
+        console.log(json);
+      },
+      error: function(xhr, status, err){
+        console.log(err);
+      }
+    });
+  });
+</script> {% endcomment %}
+{% comment %} <script>
+  $(document).on('click', '#add-cart', function(e){
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: '{% url "cart_add" %}',
+      data: {
+        product_id: $(this).data('local-id'),  // Alteração aqui
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        action: 'post'
+      },
+      success: function(json){
+        console.log(json);
+      },
+      error: function(xhr, status, err){
+        console.log(err);
+      }
+    });
+  });
+</script> {% endcomment %}
+<script>
+  $(document).on('click', '#add-cart', function(e){
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: '{% url "cart_add" %}',
+      data: {
+        product_id: $(this).data('local-id'),  // Alteração aqui
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        action: 'post'
+      },
+      success: function(json){
+        console.log(json);
+      },
+      error: function(xhr, status, err){
+        console.log(err);
+      }
+    });
+  });
+</script>
+
+{% endblock %}
