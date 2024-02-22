@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<h1>{{ local.nome_local }}</h1>
+<div class="info">
+  <p><strong>Descrição:</strong> {{ local.descricao }}</p>
+  <p><strong>Categoria:</strong> {{ local.tipo }}</p>
+  <p><strong>Cidade:</strong> {{ local.cidade }}</p>
+  <p><strong>Bairro:</strong> {{ local.bairro }}</p>
+  <p><strong>Rua:</strong> {{ local.rua }}</p>
+  <p><strong>Telefone:</strong> {{ local.telefone }}</p>
+  <p><strong>Email:</strong> {{ local.email }}</p>
+  <!-- Adicione outros campos conforme necessário -->
+</div>
+<!-- Botões para editar e excluir o registro -->
+
+
+
+{% endblock %}
