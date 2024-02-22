@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .forms import CadastroCidadeForm, CadastroLocalForm, SignUpForm, UpdateuserForm, UpdatePasswordForm
-from smarttravel.models import Categorias, Cidade, Local, Roteiro
+from smarttravel.models import Categorias, Cidade, Local
 
 
 # Paginação
@@ -150,21 +150,3 @@ def atualizar_senha(request):
         messages.success(request, "Você precisa estar logado para mudar sua senha")
         return redirect('home')
     
-
-
-def adicionar_ao_roteiro(request, local_id):
-    if request.method == 'POST':
-        local = Local.objects.get(pk=local_id)
-        # Verificar se o local já está no roteiro do usuário
-        if Roteiro.objects.filter(usuario=request.user, local=local).exists():
-            messages.warning(request, 'Este local já está no seu roteiro.')
-        else:
-            # Adicionar local ao roteiro
-            roteiro = Roteiro(usuario=request.user, local=local)
-            roteiro.save()
-            messages.success(request, 'Local adicionado ao roteiro com sucesso.')
-    return redirect('home')  # Redirecionar para a página inicial ou onde desejar
-
-def visualizar_roteiro(request):
-    roteiro = Roteiro.objects.filter(usuario=request.user)
-    return render(request, 'roteiro.html', {'roteiro': roteiro})

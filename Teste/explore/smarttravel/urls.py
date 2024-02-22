@@ -13,6 +13,4 @@ urlpatterns = [
     path('cadastro_usuario/', views.cadastro_usuario, name='cadastro_usuario'),
     path('atualizar_usuario/', views.atualizar_usuario, name='atualizar_usuario'),
     path('atualizar_senha/', views.atualizar_senha, name='atualizar_senha'),
-    path('adicionar_ao_roteiro/<int:local_id>/', views.adicionar_ao_roteiro, name='adicionar_ao_roteiro'),
-    path('visualizar_roteiro/', views.visualizar_roteiro, name='visualizar_roteiro'),
 ]

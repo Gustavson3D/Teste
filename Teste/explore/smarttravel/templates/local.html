@@ -1,6 +1,4 @@
-{% extends 'base.html' %} 
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <h1>{{ local.nome_local }}</h1>
 <div class="info">
@@ -14,12 +12,36 @@
   <!-- Adicione outros campos conforme necessário -->
 </div>
 <!-- Botões para editar e excluir o registro -->
-<div class="actions">
-<!-- Adicione outras informações do local aqui -->
-<form action="{% url 'adicionar_ao_roteiro' local.id %}" method="post">
-    {% csrf_token %}
-    <button type="submit">Adicionar ao Roteiro</button>
-</form>
 
+<button
+  type="button"
+  value="{{ local.id }}"
+  class="btn btn-secondary"
+  id="add-cart"
+>
+  Adicionar ao Roteiro
+</button>
+
+<script>
+  $(document).on("click", "#add-cart", function (e) {
+    e.preventDefault();
+    console.log("{% url 'cart_delete' %}");
+    $.ajax({
+      type: "POST",
+      url: "{% url 'cart_add' %}",
+      data: {
+        local_id: $("#add-cart").val(),
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+        action: "post",
+      },
+      success: function (json) {
+        console.log(json);
+      },
+      error: function (xhr, status, err) {
+        console.log("erro");
+      },
+    });
+  });
+</script>
 
 {% endblock %}

@@ -4,11 +4,12 @@ from django import forms
 from .models import Cidade, Local, Categorias
 
 class CadastroLocalForm(forms.ModelForm):
+    cidade = forms.ModelChoiceField(queryset=Cidade.objects.all())
+    tipo = forms.ModelChoiceField(queryset=Categorias.objects.all(), empty_label=None, widget=forms.Select(attrs={'class': 'form-control'}))
+
     class Meta:
         model = Local
-        cidade = forms.ModelChoiceField(queryset=Cidade.objects.all())
         fields = ['nome_local', 'descricao', 'cidade', 'bairro', 'rua', 'telefone', 'email', 'tipo', 'id']
-        tipo = forms.ModelChoiceField(queryset=Categorias.objects.all(), empty_label=None, widget=forms.Select(attrs={'class': 'form-control'}))
 
 class CadastroCidadeForm(forms.ModelForm):
     class Meta:
