@@ -11,9 +11,6 @@ class Cart():
 
         self.cart = cart
 
-    def __len__(self):
-        return len(self.cart)
-    
 
     def add(self, product):
 
@@ -25,3 +22,7 @@ class Cart():
             self.cart[product_id] = {'Nome': product.nome_local}
         
         self.session.modified = True
+
+
+    def __len__(self):
+        return len(self.cart)

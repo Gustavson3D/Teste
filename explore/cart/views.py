@@ -41,7 +41,10 @@ def cart_add(request):
         # Salvar na sessão
         cart.add(product=product)
 
-        response = JsonResponse({'Local Nome': product.nome_local})  
+        cart_quantity = cart.__len__()
+
+        response = JsonResponse({'Local Nome': product.nome_local})
+        response = JsonResponse({'Quantidade': cart_quantity})  
         return response
     
     # Retorne uma resposta de erro se não for uma solicitação POST válida
