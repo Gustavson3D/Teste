@@ -1,7 +1,53 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<div>
+  <h2>cart summary</h2>
+</div>
+<br />
+<div class="container">
+    {% if cart_products %}
+        {% for product in cart_products %}
+        <div class="card">
+            <h2 class="card-title">{{product.nome_local}}</h2>
+            <p class="card-description">Descrição</p>
+            </a>
+            <button type="button" data-index="{{ product.id }}" class="btn btn-danger delete-product">
+                Remover
+            </button>
+        </div>
+        {% endfor %}
+        
+    {% else %}
+    Seu roteiro está vazio...
+    {% endif %}
+    <br/><br/>
+    
+</div>
 
-{% block content %}
-    <div>
-        <h2>cart summary</h2>
-    </div>
+
+<br />
+
+
+{% comment %} Deletar item do roteiro(carrinho) {% endcomment %}
+<script>
+    $(document).on("click", ".delete-product", function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: '{% url "cart_delete" %}',
+            data: {
+                product_id: $(this).data("index"),
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+                action: "post",
+            },
+            success: function (json) {
+                console.log("Sucesso na exclusão:", json);
+                location.reload();
+            },
+            error: function (xhr, status, err) {
+                console.log("Erro na exclusão:", err);
+            },
+        });
+    });
+</script>
+
 {% endblock %}

@@ -7,52 +7,37 @@ from django.http import HttpResponse
 
 
 def cart_summary(request):
-    return render(request, 'cart_summary.html', {})
+    # puxar o cart
+    cart = Cart(request)
+    cart_products = cart.get_product
+    return render(request, 'cart_summary.html', {"cart_products": cart_products})
 
 
-# def cart_add(request):
-#     # puxar o carrinho
-#     cart = Cart(request)
-#     #Testar para postar
-#     if request.POST.get('action') == 'post':
-#         #return('O que veio no POST:')
-#         product_id = request.POST.get('product_id') # Alteração aqui
-#         # procurar o produto na database
-#         product = get_object_or_404(Local, id=product_id)
-
-#         # Salvar na sessão
-#         cart.add(product=product)
-
-#         response = JsonResponse({'Local Nome': product.nome_local})  # Use 'nome_local' em vez de 'name'
-#         return response
-    
-#     #return  HttpResponse("Not a valid request")
 
 def cart_add(request):
-    # puxar o carrinho
     cart = Cart(request)
-    
-    # Testar para postar
+
     if request.POST.get('action') == 'post':
-        product_id = request.POST.get('product_id')  # Alteração aqui
-        print(product_id)
-        # procurar o produto na database
+        product_id = request.POST.get('product_id')
         product = get_object_or_404(Local, id=product_id)
-        # Salvar na sessão
+        
         cart.add(product=product)
 
         cart_quantity = cart.__len__()
-
-        response = JsonResponse({'Local Nome': product.nome_local})
-        response = JsonResponse({'Quantidade': cart_quantity})  
+        response = JsonResponse({'Local Nome': product.nome_local, 'qty': cart_quantity})
         return response
-    
-    # Retorne uma resposta de erro se não for uma solicitação POST válida
+
     return HttpResponse("Not a valid request")
 
+
+
 def cart_delete(request):
-    pass
+    cart = Cart(request)
+    if request.POST.get('action') == 'post':
+        product_id = request.POST.get('product_id')
+        print("Tentativa de excluir o produto:", product_id)
 
-
-def cart_update(request):
-    pass
+        # Chamar a função delete no Carrinho
+        cart.delete(product=product_id)
+        response = JsonResponse({'product': product_id})  
+        return response
