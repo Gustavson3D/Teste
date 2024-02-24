@@ -30,9 +30,11 @@ def cadastro_local(request):
         form = CadastroLocalForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse('Local cadastrado com sucesso')
+            messages.success(request, 'Local cadastrado com sucesso')
+            return redirect('cadastro_local')
         else:
-            return HttpResponse('Erro no formulário. Verifique os dados informados.')
+            messages.error(request, 'Erro no formulário. Verifique os dados informados.')
+            return redirect('cadastro_local')
         
     
 def local(request, local_id):
@@ -46,8 +48,9 @@ def cadastro_cidades(request):
         form = CadastroCidadeForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')
-
+            messages.success(request, 'Cidade cadastrada com sucesso')
+        else:
+            messages.error(request, 'Erro no formulário. Verifique os dados informados.')
     else:
         form = CadastroCidadeForm()
 
