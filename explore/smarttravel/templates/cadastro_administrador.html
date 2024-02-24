@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Administrador</title>
+</head>
+<body>
+    <h1>Cadastro de Administrador</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Cadastrar Administrador</button>
+    </form>
+</body>
+</html>

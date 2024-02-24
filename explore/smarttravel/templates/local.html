@@ -12,9 +12,9 @@
   <!-- Adicione outros campos conforme necessário -->
 </div>
 
-<a href="{% url 'home' %}" class="btn btn secondary">home</a>
+<a href="{% url 'home' %}" class="btn btn-secondary">Home</a>
 
-<!-- Botões para editar e excluir o registro -->
+<!-- Botão para adicionar ao carrinho -->
 <button
   type="button"
   data-local-id="{{ local.id }}"
@@ -24,20 +24,21 @@
   Adicionar
 </button>
 
+<div id="map">mapa</div>
+
 <script>
   $(document).on("click", "#add-cart", function (e) {
     e.preventDefault();
-    
+
     $.ajax({
       type: "POST",
       url: '{% url "cart_add" %}',
       data: {
-        product_id: $(this).data("local-id"), // Alteração aqui
+        product_id: $(this).data("local-id"),
         csrfmiddlewaretoken: "{{ csrf_token }}",
         action: "post",
       },
       success: function (json) {
-        //console.log(json);
         document.getElementById("cart_quantity").textContent = json.qty;
         location.reload();
       },
@@ -46,6 +47,19 @@
       },
     });
   });
+
+  // Mapa Leaflet
+  var map = L.map("map").setView([51.505, -0.09], 13);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution:
+      '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(map);
+
+  var popup = L.popup()
+    .setLatLng([51.513, -0.09])
+    .setContent("I am a standalone popup.")
+    .openOn(map);
 </script>
 
 {% endblock %}

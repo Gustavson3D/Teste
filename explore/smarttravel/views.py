@@ -2,8 +2,9 @@ from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .forms import CadastroCidadeForm, CadastroLocalForm, SignUpForm, UpdateuserForm, UpdatePasswordForm
+from .forms import CadastroAdminForm, CadastroCidadeForm, CadastroLocalForm, SignUpForm, UpdateuserForm, UpdatePasswordForm
 from smarttravel.models import Categorias, Cidade, Local
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 # Paginação
@@ -14,6 +15,10 @@ def home(request):
     cidades = Cidade.objects.all()
     print(request.user)
     return render(request, 'home.html', {'cidades':cidades})
+
+def perfil(request):
+        
+    return render(request, 'perfil.html')
 
 
 def cadastro_local(request):
@@ -123,8 +128,6 @@ def atualizar_usuario(request):
     else:
         messages.error(request, 'Faça login para poder modificar sua conta!')
         return redirect(request, 'login.html')
-    
-    return render(request, 'atualizar_usuario.html', {})
 
 
 def atualizar_senha(request):
@@ -149,4 +152,21 @@ def atualizar_senha(request):
     else:
         messages.success(request, "Você precisa estar logado para mudar sua senha")
         return redirect('home')
+    
+
+@staff_member_required # Restrição de acesso apenas para administradores
+def cadastro_administrador(request):
+    if request.method == 'POST':
+        form = CadastroAdminForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_staff = True  # Definir o usuário como administrador
+            user.save()
+            messages.success(request, 'Administrador cadastrado com sucesso!')
+            return redirect('home')  # Redirecionar para a página inicial após o cadastro
+    else:
+        form = CadastroAdminForm()
+    return render(request, 'cadastro_administrador.html', {'form': form})
+
+
     

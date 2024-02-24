@@ -13,4 +13,6 @@ urlpatterns = [
     path('cadastro_usuario/', views.cadastro_usuario, name='cadastro_usuario'),
     path('atualizar_usuario/', views.atualizar_usuario, name='atualizar_usuario'),
     path('atualizar_senha/', views.atualizar_senha, name='atualizar_senha'),
+    path('cadastro_administrador/', views.cadastro_administrador, name='cadastro_administrador'),
+    path('perfil/', views.perfil, name='perfil'),
 ]
