@@ -112,9 +112,9 @@
     {% endfor %} {% endif %}
     <h1>Cadastro de Local</h1>
 
-    <form method="post" action="{% url 'cadastro_local' %}">
-      {% csrf_token %} {{ form.as_p }}
-
+    <form method="post" action="{% url 'cadastro_local' %}" enctype="multipart/form-data">
+      {% csrf_token %} 
+      {{ form.as_p }}
       <button type="submit">Cadastrar Local</button>
       <a href="{% url 'home' %}" class="btn btn-primary">Voltar para a página inicial</a>
     </form>

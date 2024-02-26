@@ -27,39 +27,54 @@
 <div id="map">mapa</div>
 
 <script>
-  $(document).on("click", "#add-cart", function (e) {
-    e.preventDefault();
+    $(document).on("click", "#add-cart", function (e) {
+      e.preventDefault();
 
-    $.ajax({
-      type: "POST",
-      url: '{% url "cart_add" %}',
-      data: {
-        product_id: $(this).data("local-id"),
-        csrfmiddlewaretoken: "{{ csrf_token }}",
-        action: "post",
-      },
-      success: function (json) {
-        document.getElementById("cart_quantity").textContent = json.qty;
-        location.reload();
-      },
-      error: function (xhr, status, err) {
-        console.log(err);
-      },
+      $.ajax({
+        type: "POST",
+        url: '{% url "cart_add" %}',
+        data: {
+          product_id: $(this).data("local-id"),
+          csrfmiddlewaretoken: "{{ csrf_token }}",
+          action: "post",
+        },
+        success: function (json) {
+          document.getElementById("cart_quantity").textContent = json.qty;
+          location.reload();
+        },
+        error: function (xhr, status, err) {
+          console.log(err);
+        },
+      });
     });
-  });
 
-  // Mapa Leaflet
-  var map = L.map("map").setView([51.505, -0.09], 13);
+    // Mapa Leaflet
+    {% comment %} const map = L.map("map").setView([51.505, -0.09], 13);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution:
+        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(map);
+
+    const popup = L.popup()
+      .setLatLng([51.513, -0.09])
+      .setContent("I am a standalone popup.")
+      .openOn(map); {% endcomment %}
+
+  const latitude = {{ local.latitude }};
+  const longitude = {{ local.longitude }};
+  const local = {{local.nome_local}}
+
+  const map = L.map("map").setView([latitude, longitude], 19);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution:
-      '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
 
-  var popup = L.popup()
-    .setLatLng([51.513, -0.09])
-    .setContent("I am a standalone popup.")
-    .openOn(map);
+  const popup = L.popup()
+      .setLatLng([latitude, longitude])
+      .setContent("I")
+      .openOn(map);
 </script>
 
 {% endblock %}

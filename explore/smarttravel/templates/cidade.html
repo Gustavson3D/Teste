@@ -42,9 +42,10 @@
 
     <br />
     <h1>Cidade</h1>
-    {{cidade.nome_cidade}} {% for local in locais %}
-
+    {{cidade.nome_cidade}} 
+    {% for local in locais %}
     <div class="card">
+      <img src="/media/{{local.imagem}}" alt="image" width="200px">
       <a href="{% url 'local' local_id=local.id %}">
         <h2 class="card-title">{{local.nome_local}}</h2>
         <p class="card-description">Descrição</p>

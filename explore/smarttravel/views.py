@@ -27,7 +27,7 @@ def cadastro_local(request):
         cidades = Cidade.objects.all()
         return render(request, 'cadastro_local.html', {'cidades':cidades, 'form':form})
     elif request.method == 'POST':
-        form = CadastroLocalForm(request.POST)
+        form = CadastroLocalForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'Local cadastrado com sucesso')
@@ -45,7 +45,7 @@ def local(request, local_id):
 
 def cadastro_cidades(request):
     if request.method == 'POST':
-        form = CadastroCidadeForm(request.POST)
+        form = CadastroCidadeForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'Cidade cadastrada com sucesso')
@@ -57,8 +57,8 @@ def cadastro_cidades(request):
     return render(request, 'cadastro_cidade.html', {'form': form})
 
 
-def cidade(request, city_slug):
-    cidade = get_object_or_404(Cidade, nome_cidade=city_slug)
+def cidade(request, cidade_id):
+    cidade = get_object_or_404(Cidade, id=cidade_id)
     categorias = Categorias.objects.all()
     categoria_selecionada = request.GET.get('categoria')
     termo_pesquisa = request.GET.get('q')
