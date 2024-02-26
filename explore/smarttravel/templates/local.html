@@ -49,21 +49,9 @@
     });
 
     // Mapa Leaflet
-    {% comment %} const map = L.map("map").setView([51.505, -0.09], 13);
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-      attribution:
-        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    }).addTo(map);
-
-    const popup = L.popup()
-      .setLatLng([51.513, -0.09])
-      .setContent("I am a standalone popup.")
-      .openOn(map); {% endcomment %}
-
   const latitude = {{ local.latitude }};
   const longitude = {{ local.longitude }};
-  const local = {{local.nome_local}}
+  const local = "{{local.nome_local}}";
 
   const map = L.map("map").setView([latitude, longitude], 19);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -73,7 +61,7 @@
 
   const popup = L.popup()
       .setLatLng([latitude, longitude])
-      .setContent("I")
+      .setContent(local)
       .openOn(map);
 </script>
 
