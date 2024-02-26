@@ -8,14 +8,20 @@
         <div class="carousel-container">
             <div class="carousel-slide">
                 <div class="slide-inner">
-                    <div class="slide-image" style="background-image:url(media/images/penhasco.jpg)"></div>
+                    <div class="slide-image" style="background-image:url(media/images/penhasco.jpg)" ></div>
                     <div class="swiper-content1 container">
                         <h4 class="white">Melhores Destinos</h4>
                         <h1 class="white mb-4">Descubra Lugares Incríveis e Tenha Experiências Únicas</h1>
-                        <a href="#" class="per-btn">
-                            <span class="white">Descubra</span>
-                            <i class="fa fa-arrow-right white"></i>
-                        </a>
+                    </div>
+                    <div class="dot-overlay"></div>
+                </div> 
+            </div>
+            <div class="carousel-slide">
+                <div class="slide-inner">
+                    <div class="slide-image" style="background-image:url(media/images/banner_praia.jpeg)"></div>
+                    <div class="swiper-content1 container">
+                        <h4 class="white">Melhores Destinos</h4>
+                        <h1 class="white mb-4">Descubra Lugares Incríveis e Tenha Experiências Únicas</h1> 
                     </div>
                     <div class="dot-overlay"></div>
                 </div> 
@@ -25,11 +31,17 @@
                     <div class="slide-image" style="background-image:url(media/images/culinaria_alema.webp)"></div>
                     <div class="swiper-content1 container">
                         <h4 class="white">Viaje nos sabores</h4>
-                        <h1 class="white mb-4">Aprecie a Diversidade da Culinária Local</h1>
-                        <a href="#" class="per-btn">
-                            <span class="white">Descubra</span>
-                            <i class="fa fa-arrow-right white"></i>
-                        </a>
+                        <h1 class="white mb-4">Aprecie a Diversidade da Culinária Local</h1> 
+                    </div>
+                    <div class="dot-overlay"></div>
+                </div> 
+            </div>
+            <div class="carousel-slide">
+                <div class="slide-inner">
+                    <div class="slide-image" style="background-image:url(media/images/banner_cerveja.jpeg)"></div>
+                    <div class="swiper-content1 container">
+                        <h4 class="white">Viaje nos sabores</h4>
+                        <h1 class="white mb-4">Aprecie a Diversidade da Culinária Local</h1> 
                     </div>
                     <div class="dot-overlay"></div>
                 </div> 
@@ -38,12 +50,8 @@
                 <div class="slide-inner">
                     <div class="slide-image" style="background-image:url(media/images/beto_carrero.webp)"></div>
                     <div class="swiper-content1 container">
-                        <h4 class="white">Viaje com Sua Família</h4>
-                        <h1 class="white mb-4">Torne Sua Viagem Divertida e Memorável</h1>
-                        <a href="#" class="per-btn">
-                            <span class="white">Descubra</span>
-                            <i class="fa fa-arrow-right white"></i>
-                        </a>
+                        <h4 class="white">Viaje em familia</h4>
+                        <h1 class="white mb-4">Torne Sua Viagem Divertida e Memoravél</h1> 
                     </div>
                     <div class="dot-overlay"></div>
                 </div> 
@@ -59,9 +67,6 @@
       <div class="form-content w-100"> 
           <h3 class="form-title text-center d-inline white">Explore SC</h3>
           <div class="d-lg-flex align-items-center justify-content-between">
-
-
-          
           </div>
       </div>
   </div>
@@ -70,16 +75,18 @@
 {% comment %} Card da cidade {% endcomment %}
   {% for cidade in cidades %}
     <section class="top-deals bg-grey pt-9">
-      <div class="card">
-          <div> 
-              <img src="media/{{cidade.imagem}}" alt="image" width="200px">
-              <h6 class="font-weight-normal"><i class="fa fa-map-marker-alt"></i> Brasil</h6>
-              <h4><a href="/cidade/{{cidade.id}}">{{cidade.nome_cidade}}</a></h4>
-              <p></p>  
-          </div>   
-      </div>
+    <div class="card" style="width: 18rem;">
+        <img src="media/{{cidade.imagem}}" class="card-img-top" alt="image" width="200px">
+        <div class="card-body">
+          <h5 class="card-title">{{cidade.nome_cidade}}</h5>
+          <p class="card-text">{{cidade.descricao}}</p>
+          <h4><a class='btn btn-primary' href="/cidade/{{cidade.id}}">Descubra</a></h4>
+        </div>
+    </div>
     </section>
   {% endfor %}
+
+
 
 
 <section class="why-us pt-10 pb-6">
@@ -210,12 +217,12 @@
                       <div class="footer-links">
                           <img src="media/images/logo branca_.png" alt="logo" width="200">
                           <p class="mt-3">
-                              In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna
+                            Somos uma plataforma que visa a praticidade e agilidade na sua experiência de viagem.
                           </p>
                           <ul>
                               <li><strong>Telefone:</strong> (47) 9967-4794</li>
                               <li><strong>Endereço:</strong> Blumenau, Santa Catarina</li>
-                              <li><strong>Email:</strong> info@Ysmart.com</li>
+                              <li><strong>Email:</strong> info@smarttravel.com</li>
                               <li><strong>Website:</strong> www.smarttravel.com</li>
                           </ul>
                       </div>
@@ -237,7 +244,8 @@
                   <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-4">
                       <div class="footer-links">
                           <h4 class="white">Newsletter</h4>
-                          <p>Want to be notified when we launch a new template or an udpate. Just sign up and we'll send you a notification by email.</p>
+                          <p>Quer ficar por dentro das novidades
+                            Basta se inscrever e enviaremos uma notificação por e-mail.</p>
                           <div class="newsletter-form">
                               <form>
                                   <input type="email" placeholder="Enter your email">
