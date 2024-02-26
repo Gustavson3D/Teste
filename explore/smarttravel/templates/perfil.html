@@ -1,8 +1,15 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Perfil do Usuário</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
   </head>
   <body>
     <h1>Perfil do Usuário</h1>
@@ -15,18 +22,29 @@
     <!-- Formulário para atualizar informações do perfil -->
     <h2>Editar Perfil</h2>
     <a href="{% url 'atualizar_usuario' %}" class="btn btn-primary">
-        Atualizar Conta
-      </a>
+      Atualizar Conta
+    </a>
 
     <!-- Formulário para alterar a senha -->
     <h2>Alterar Senha</h2>
     <a href="{% url 'atualizar_senha' %}" class="btn btn-primary">
       Atualizar Senha
     </a>
-    
-    <br /><br />
 
-    <!-- Link para fazer logout -->
-    <a href="{% url 'logout' %}">Logout</a>
+    <!-- Condição para mostrar links apenas se o usuário for administrador -->
+    {% if user.is_staff %}
+    <h2>Administração</h2>
+    <a href="{% url 'cadastro_local' %}" class="btn btn-primary">
+      Cadastrar Local
+      <br/>
+    </a>
+    <a href="{% url 'cadastro_cidade' %}" class="btn btn-primary">
+      Cadastrar Cidade
+    </a>
+    <br/>
+    <a href="{% url 'cadastro_administrador' %}" class="btn btn-primary">
+      Cadastrar Administrador
+    </a>
+    {% endif %}
   </body>
 </html>

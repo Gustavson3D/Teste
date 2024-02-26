@@ -67,7 +67,7 @@ def cidade(request, cidade_id):
 
     if categoria_selecionada:
         locais = locais.filter(tipo__categorias=categoria_selecionada)
-
+    categorias = Categorias.objects.all()
     if termo_pesquisa:
         locais = locais.filter(nome_local__icontains=termo_pesquisa)
 

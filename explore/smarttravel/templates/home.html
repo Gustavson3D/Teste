@@ -58,6 +58,7 @@
             </div>
         </div>
     </div>
+    <br/>
 </section>
 <!-- fim banner-->
 
@@ -74,15 +75,15 @@
 
 {% comment %} Card da cidade {% endcomment %}
   {% for cidade in cidades %}
-    <section class="top-deals bg-grey pt-9">
-    <div class="card" style="width: 18rem;">
-        <img src="media/{{cidade.imagem}}" class="card-img-top" alt="image" width="200px">
-        <div class="card-body">
-          <h5 class="card-title">{{cidade.nome_cidade}}</h5>
-          <p class="card-text">{{cidade.descricao}}</p>
-          <h4><a class='btn btn-primary' href="/cidade/{{cidade.id}}">Descubra</a></h4>
+    <section class="top-deals bg-white pt-9">
+        <div class="card" style="width: 18rem; display: inline-block;">
+            <img src="media/{{cidade.imagem}}" class="card-img-top" alt="image" width="200px">
+            <div class="card-body">
+                <h5 class="card-title">{{cidade.nome_cidade}}</h5>
+                <p class="card-text">{{cidade.descricao}}</p>
+                <h4><a class='btn btn-primary' href="/cidade/{{cidade.id}}">Descubra</a></h4>
+            </div>
         </div>
-    </div>
     </section>
   {% endfor %}
 
