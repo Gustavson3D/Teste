@@ -1,4 +1,87 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% block content %}
+
+{% comment %} Navbar {% endcomment %}
+<nav class="navbar navbar-expand-lg navbar-light bg-blue">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img src="/media/images/logo branca_.png" alt="logo" width="200">
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/servicos">Serviços</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/unidades">Unidades</a>
+        </li>
+
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {% if user.is_authenticated %} 
+            Perfil 
+            {% else %} 
+            Log-in 
+            {% endif %}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {% if user.is_authenticated %}
+            <li>
+              <a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li>
+              <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'cadastro_usuario' %}"
+                >Cadastre-se</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+        <!-- Adicione mais itens de menu conforme necessário -->
+      </ul>
+      <a href="{% url 'cart_summary' %}" class="btn btn-outline-dark ">
+        <i class="bi-cart-fill me-1"></i>
+        Cart
+        <span
+          class="badge bg-dark text-white ms-1 rounded-pill"
+          id="cart_quantity"
+        >
+          {{ cart|length }}
+        </span></a
+      >
+    </div>
+  </div>
+</nav>
+{% comment %} navbar final {% endcomment %}
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Categorias</a>
@@ -13,16 +96,7 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        {% for categoria in categorias %}
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'cidade' cidade_id=cidade.id %}?categoria={{categoria.categorias}}">
-            {{categoria.categorias}}
-        </a>
-    </li>
-{% endfor %}
-      </ul>
+    
       <div class="nav-item">
         <form method="GET">
           <input type="text" name="q" placeholder="Pesquisar locais" />
@@ -33,11 +107,20 @@
   </div>
 </nav>
 
+
+  <div class="container"> 
+    {% for categoria in categorias %}
+    <a class="nav-link" href="{% url 'cidade' cidade_id=cidade.id %}?categoria={{categoria.categorias}}">
+        {{categoria.categorias}}
+    </a>
+    {% endfor %}
+  </div>
+
 <br />
 <h1>{{cidade.nome_cidade}}</h1>
 <br />
 
-{% for local in locais %}
+{% for local in locais %} 
 <section class="top-deals bg-white pt-9">
   <div class="card" style="width: 18rem; display: inline-block;">
     <img

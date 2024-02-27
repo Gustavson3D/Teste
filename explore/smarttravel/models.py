@@ -14,6 +14,7 @@ class Cidade(models.Model):
 class Categorias(models.Model):
     id_categorias = models.AutoField(primary_key=True)
     categorias = models.CharField(max_length=100)
+    imagem = models.ImageField(upload_to='categorias/', verbose_name='Imagem', blank=True)
     
     def __str__(self):
         return self.categorias  
