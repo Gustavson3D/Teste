@@ -82,39 +82,30 @@
 {% comment %} navbar final {% endcomment %}
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Categorias</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-      <div class="nav-item">
-        <form method="GET">
-          <input type="text" name="q" placeholder="Pesquisar locais" />
-          <button class="btn btn-secondary" type="submit">Pesquisar</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</nav>
 
-
-  <div class="container"> 
+<div class="filter-container">
+    <form method="GET">
+      <input class='filter' type="text" name="q" placeholder="Pesquisar locais"/>
+      <button class="btn btn-secondary" type="submit">Pesquisar</button>
+    </form>
+</div>
+<div class="filters">
+  <div class="filter-categorias">
     {% for categoria in categorias %}
-    <a class="nav-link" href="{% url 'cidade' cidade_id=cidade.id %}?categoria={{categoria.categorias}}">
-        {{categoria.categorias}}
-    </a>
+      <div class="categories">
+        <a href="{% url 'cidade' cidade_id=cidade.id %}?categoria={{categoria.categorias}}">
+            {{categoria.categorias}}
+        </a>
+      </div>
     {% endfor %}
   </div>
+</div>
+  
+
+
+
+
+  
 
 <br />
 <h1>{{cidade.nome_cidade}}</h1>

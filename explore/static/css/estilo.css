@@ -90,7 +90,7 @@ ol {
     padding-left: 0;
     position: relative; }
 
-a {
+/* a {
   color: #3f3f3f;
   transition: all ease-in-out 0.5s;
   cursor: pointer; }
@@ -105,14 +105,14 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
 
 ::-webkit-input-placeholder {
   /* Edge */
-  color: #777 !important; }
+  /* color: #777 !important; }
 
 :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: #777 !important; }
+  /* color: #777 !important; }
 
 input::placeholder {
-  color: #777 !important; }
+  color: #777 !important; } */
 
 img {
   max-width: 100%; }
@@ -328,7 +328,7 @@ img {
   .form-group select {
     padding: 10px 20px 10px 35px; }
 
-input[type=text], input[type=email], input[type=number], input[type=search],
+/* input[type=text], input[type=email], input[type=number], input[type=search],
 input[type=password], input[type=tel], input[type=date], input[type=time], textarea, select {
   font-size: 15px;
   font-weight: 300;
@@ -345,7 +345,7 @@ input[type=password], input[type=tel], input[type=date], input[type=time], texta
   input[type=password]:focus, input[type=tel]:focus, input[type=date]:focus, input[type=time]:focus, textarea:focus, select:focus {
     outline: none;
     transition: all 0.5s ease;
-    box-shadow: none; }
+    box-shadow: none; } */
 
 select {
   padding: 8px 20px;
@@ -423,7 +423,7 @@ table {
   table thead tr th {
     border-bottom: none !important; }
 
-.overlay, .dot-overlay, .color-overlay, .black-overlay {
+/* .overlay, .dot-overlay, .color-overlay, .black-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -448,7 +448,7 @@ table {
 
 section {
   padding: 4.75rem 0 5rem;
-  position: relative; }
+  position: relative; } */
 
 /*heading title*/
 .section-title, .section-title-w {

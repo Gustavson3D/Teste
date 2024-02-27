@@ -17,35 +17,97 @@
     margin: 10px;
 }
 
-.card {
-    border: 1px solid #ddd;
+.cart-card {
+    margin: 1rem;
+    border: .1rem solid #000;
+    border-radius: 20px;
     background-color: #f9f9f9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease-in-out;
     display: flex;
-    flex-direction: column;
-    height: 100%;
+    flex-flow: row nowrap;
 }
 
-.card:hover {
+.cart-card:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.card-body {
-    flex-grow: 1;
-    padding: 10px;
-    text-align: center;
+.card-cover {
+    width: 100%;
+    height: fit-content;
+    margin: .5rem;
+}
+
+.card-cover img {
+    height: 7rem;
+    width: 10.5rem;
+    border-radius: 15px;
+}
+
+.card-info {
+    width: 70%;
+    display: flex;
+    flex-flow: column nowrap;
 }
 
 .card-title {
-    font-size: 1.5em;
-    margin-bottom: 10px;
+    margin: 0 .5rem;
+    height: 50%;
+    display: flex;
+    align-items: end;
 }
 
 .card-description {
+    margin: 0 .5rem;
+    height: 50%;
+    display: flex;
+    align-items: start;
     color: #050505;
 }
 
-.delete-product {
-    align-self: flex-end;
+.card-delete {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-delete button {
+    height: 3rem;
+    width: 3rem;
+    padding: .5rem;
+    margin: 0 .5rem;
+}
+
+
+/* ------------- */
+.main-container {
+    width: 100%;
+}
+
+.cart-container {
+    margin: 4rem;
+    display: flex;
+    flex-flow: row nowrap;
+    border: .15rem solid #000;
+}
+
+.cart-left {
+    width: 60%;
+}
+
+.cart-title {
+    margin: 1rem;
+    border-bottom: .1rem solid #000;
+}
+
+.cart-items {
+    display: flex;
+    flex-flow: column;
+    margin: 0 1rem;
+}
+
+.cart-right {
+    width: 40%;
+    height: 100%;
 }
