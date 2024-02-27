@@ -1,22 +1,28 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Atualizar Usuário</title>
-</head>
-<body>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/cart.css' %}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/alterar_user.css' %}"
+    />
+  </head>
+  <body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <h1>Atualizar Usuário</h1>
-                <form method="POST">
-                    {% csrf_token %}
-                    {{ usuario_form.as_p }}
-                    <button type="submit" class="btn btn-primary">Atualizar</button>
-                </form>
-            </div>
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <h1>Atualizar Usuário</h1>
+          <form method="POST">
+            {% csrf_token %} {{ usuario_form.as_p }}
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+          </form>
         </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

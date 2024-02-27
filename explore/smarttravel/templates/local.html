@@ -1,182 +1,201 @@
 {% extends 'base.html' %} 
-{% block content %}
+{% block content %} 
 
-{% comment %} Navbar {% endcomment %}
+
+{% comment %} Navbar {% endcomment%}
 <nav class="navbar navbar-expand-lg navbar-light bg-blue">
-    <div class="container">
-      <a class="navbar-brand" href="/">
-        <img src="/media/images/logo branca_.png" alt="logo" width="200">
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/servicos">Serviços</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/unidades">Unidades</a>
-          </li>
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img src="/media/images/logo branca_.png" alt="logo" width="200" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/servicos">Serviços</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/unidades">Unidades</a>
+        </li>
 
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              {% if user.is_authenticated %} 
-              Perfil 
-              {% else %} 
-              Log-in 
-              {% endif %}
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              {% if user.is_authenticated %}
-              <li>
-                <a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-              </li>
-              {% else %}
-              <li>
-                <a class="dropdown-item" href="{% url 'login' %}">Login</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="{% url 'cadastro_usuario' %}"
-                  >Cadastre-se</a
-                >
-              </li>
-              {% endif %}
-            </ul>
-          </div>
-          <!-- Adicione mais itens de menu conforme necessário -->
-        </ul>
-        <a href="{% url 'cart_summary' %}" class="btn btn-outline-dark">
-          <i class="bi-cart-fill me-1"></i>
-          Cart
-          <span
-            class="badge bg-dark text-white ms-1 rounded-pill"
-            id="cart_quantity"
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
           >
-            {{ cart|length }}
-          </span></a
+            {% if user.is_authenticated %} Perfil {% else %} Log-in {% endif %}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {% if user.is_authenticated %}
+            <li>
+              <a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li>
+              <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'cadastro_usuario' %}"
+                >Cadastre-se</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+        <!-- Adicione mais itens de menu conforme necessário -->
+      </ul>
+      <a href="{% url 'cart_summary' %}" class="btn btn-outline-dark">
+        <i class="bi-cart-fill me-1"></i>
+        Cart
+        <span
+          class="badge bg-dark text-white ms-1 rounded-pill"
+          id="cart_quantity"
         >
-      </div>
+          {{ cart|length }}
+        </span></a
+      >
     </div>
-  </nav>
-  {% comment %} navbar final {% endcomment %}
+  </div>
+</nav>
+{% comment %} navbar final {% endcomment %}
 
 <div id="map">mapa</div>
 
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
+<div class="container">
+  <div class="content">
+    <h1>{{ local.nome_local }}</h1>
+    <p><strong>Descrição:</strong> {{ local.descricao }}</p>
 
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <p><strong>Cidade:</strong> {{ local.cidade }}</p>
+    <p><strong>Bairro:</strong> {{ local.bairro }}</p>
+    <p><strong>Rua:</strong> {{ local.rua }}</p>
+    <p><strong>Telefone:</strong> {{ local.telefone }}</p>
+    <p><strong>Email:</strong> {{ local.email }}</p>
 
-<h1>{{ local.nome_local }}</h1>
-<div class="info">
-  <p><strong>Descrição:</strong> {{ local.descricao }}</p>
-  <p><strong>Categoria:</strong> {{ local.tipo }}</p>
-  <p><strong>Cidade:</strong> {{ local.cidade }}</p>
-  <p><strong>Bairro:</strong> {{ local.bairro }}</p>
-  <p><strong>Rua:</strong> {{ local.rua }}</p>
-  <p><strong>Telefone:</strong> {{ local.telefone }}</p>
-  <p><strong>Email:</strong> {{ local.email }}</p>
-  <!-- Adicione outros campos conforme necessário -->
+    <!-- Adicione outros campos conforme necessário -->
+
+    <div class="buttons">
+      <a href="{% url 'home' %}" class="btn btn-primary">Home</a>
+
+      <!-- Botão para adicionar ao carrinho -->
+      <button type="button" data-local-id="{{ local.id }}" class="botão" id="add-cart" >
+        Adicionar
+      </button>
+    </div>
+  </div>
 </div>
 
-<a href="{% url 'home' %}" class="btn btn-secondary">Home</a>
-
-<!-- Botão para adicionar ao carrinho -->
-<button
-  type="button"
-  data-local-id="{{ local.id }}"
-  class="btn btn-secondary"
-  id="add-cart"
->
-  Adicionar
-</button>
-
-
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 <!-- footer-->
-<footer style="background-image:url(\media\images\floripa_ponte.webp);" class="pt-10 ">
+<footer
+  style="background-image: url(\media\images\floripa_ponte.webp)"
+  class="pt-10"
+>
   <div class="footer-upper pb-5">
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-4">
-                  <div class="footer-links">
-                      <img src="/media/images/logo branca_.png" alt="logo" width="200">
-                      <p class="mt-3">
-                          Somos uma plataforma que visa a praticidade e agilidade na sua experiência de viagem.
-                      </p>
-                      <ul>
-                          <li><strong>Telefone:</strong> (47) 9967-4794</li>
-                          <li><strong>Endereço:</strong> Blumenau, Santa Catarina</li>
-                          <li><strong>Email:</strong> info@Ysmart.com</li>
-                          <li><strong>Website:</strong> www.smarttravel.com</li>
-                      </ul>
-                  </div>
-              </div>
-              
-              <div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 mb-4">
-                  <div class="footer-links">
-                      <h4 class="white">Serviços</h4>
-                      <ul>
-                          <li><a href="#">Pagamento</a></li>
-                          <li><a href="#">Feedback</a></li>
-                          <li><a href="#">Fale Conosco</a></li>
-                          <li><a href="#">Outros Serviços</a></li>
-                          <li><a href="#">FAQ</a></li>
-                          <li><a href="#">Mapas</a></li>
-                      </ul>
-                  </div>
-              </div>
-              <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-4">
-                  <div class="footer-links">
-                      <h4 class="white">Newsletter</h4>
-                      <p>Want to be notified when we launch a new template or an udpate. Just sign up and we'll send you a notification by email.</p>
-                      <div class="newsletter-form">
-                          <form>
-                              <input type="email" placeholder="Enter your email">
-                              <input type="submit" class="nir-btn mt-2 w-100" value="Subscribe">
-                          </form>
-                      </div> 
-                  </div>     
-              </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-4">
+          <div class="footer-links">
+            <img src="/media/images/logo branca_.png" alt="logo" width="200" />
+            <p class="mt-3">
+              Somos uma plataforma que visa a praticidade e agilidade na sua
+              experiência de viagem.
+            </p>
+            <ul>
+              <li><strong>Telefone:</strong> (47) 9967-4794</li>
+              <li><strong>Endereço:</strong> Blumenau, Santa Catarina</li>
+              <li><strong>Email:</strong> info@Ysmart.com</li>
+              <li><strong>Website:</strong> www.smarttravel.com</li>
+            </ul>
           </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 mb-4">
+          <div class="footer-links">
+            <h4 class="white">Serviços</h4>
+            <ul>
+              <li><a href="#">Pagamento</a></li>
+              <li><a href="#">Feedback</a></li>
+              <li><a href="#">Fale Conosco</a></li>
+              <li><a href="#">Outros Serviços</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Mapas</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-4">
+          <div class="footer-links">
+            <h4 class="white">Newsletter</h4>
+            <p>
+              Want to be notified when we launch a new template or an udpate.
+              Just sign up and we'll send you a notification by email.
+            </p>
+            <div class="newsletter-form">
+              <form>
+                <input type="email" placeholder="Enter your email" />
+                <input
+                  type="submit"
+                  class="nir-btn mt-2 w-100"
+                  value="Subscribe"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
   <div class="footer-copyright pt-2 pb-2">
-      <div class="container">
-          <div class="copyright-inner d-md-flex align-items-center justify-content-between">
-              <div class="copyright-text">
-                  <p class="m-0 white">2024 Smart Travel. Todos os direitos reservados.</p>
-              </div>
-              <div class="social-links">
-                  <ul>  
-                      <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                      <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                      <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-                      <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
-                  </ul>
-              </div>
-          </div>    
+    <div class="container">
+      <div
+        class="copyright-inner d-md-flex align-items-center justify-content-between"
+      >
+        <div class="copyright-text">
+          <p class="m-0 white">
+            2024 Smart Travel. Todos os direitos reservados.
+          </p>
+        </div>
+        <div class="social-links">
+          <ul>
+            <li>
+              <a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#"
+                ><i class="fab fa-instagram" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+            </li>
+          </ul>
+        </div>
       </div>
+    </div>
   </div>
   <div class="overlay"></div>
 </footer>

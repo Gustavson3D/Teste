@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e4fff4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    background-color: #d5eaff;
+    width: 80%;
+    height: 900px;
+    margin: 20px auto;
+    border: 1px solid #000000;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  
+  .profile-info {
+    float: left;
+    width: 35%;
+    height: 100%;
+    padding: 20px;
+    border-right: 1px solid #5b5f63;
+    box-sizing: border-box;
+  }
+  
+  .profile-info h1,
+  .profile-info h2 {
+    color: #343a40;
+  }
+  
+  .edit-profile,
+  .change-password,
+  .admin-section {
+    margin-top: 20px;
+  }
+  
+  .btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #1a46d9;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid #040404;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .btn-primary:hover {
+    background-color: #00b395;
+  }
+  
+  .reserved-section {
+    margin-top: 50px;
+    margin-left: 620px;
+  }
+  
+  .reserved-section a {
+    margin-top: 10px;
+    display: list-item;
+    width: 19%;
+  }

@@ -11,7 +11,8 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
-    border: .10em solid #000;
+    border-top: .10em solid #000;
+    border-bottom: .10em solid #000;
 }
 
 .categories a {
@@ -21,7 +22,6 @@
     transition: all 200ms ease-in-out;
     background-color: orange;
     margin: 0 2rem;
-    border: 2px;
     border: 1px solid #000;
 }
 
@@ -36,3 +36,4 @@
     align-items: center;
     margin-top: 2rem;
 }
+

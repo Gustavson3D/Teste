@@ -3,89 +3,71 @@
 
 {% comment %} Navbar {% endcomment %}
 <nav class="navbar navbar-expand-lg navbar-light bg-blue">
-    <div class="container">
-      <a class="navbar-brand" href="/">
-        <img src="/media/images/logo branca_.png" alt="logo" width="200">
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/servicos">Serviços</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/unidades">Unidades</a>
-          </li>
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img src="/media/images/logo branca_.png" alt="logo" width="200">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/servicos">Serviços</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/unidades">Unidades</a>
+        </li>
 
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              {% if user.is_authenticated %} 
-              Perfil 
-              {% else %} 
-              Log-in 
-              {% endif %}
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              {% if user.is_authenticated %}
-              <li>
-                <a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-              </li>
-              {% else %}
-              <li>
-                <a class="dropdown-item" href="{% url 'login' %}">Login</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="{% url 'cadastro_usuario' %}"
-                  >Cadastre-se</a
-                >
-              </li>
-              {% endif %}
-            </ul>
-          </div>
-          <!-- Adicione mais itens de menu conforme necessário -->
-        </ul>
-        <a href="{% url 'cart_summary' %}" class="btn btn-outline-dark">
-          <i class="bi-cart-fill me-1"></i>
-          Cart
-          <span
-            class="badge bg-dark text-white ms-1 rounded-pill"
-            id="cart_quantity"
-          >
-            {{ cart|length }}
-          </span></a
-        >
-      </div>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            {% if user.is_authenticated %} 
+            Perfil 
+            {% else %} 
+            Log-in 
+            {% endif %}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {% if user.is_authenticated %}
+            <li>
+              <a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li>
+              <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'cadastro_usuario' %}" >Cadastre-se</a >
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+        <!-- Adicione mais itens de menu conforme necessário -->
+      </ul>
+      <a href="{% url 'cart_summary' %}" class="btn btn-outline-dark">
+        <i class="bi-cart-fill me-1"></i>
+        Cart
+      <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart_quantity">
+        {{ cart|length }}
+      </span></a>
     </div>
-  </nav>
-  {% comment %} navbar final {% endcomment %}
+  </div>
+</nav>
+{% comment %} navbar final {% endcomment %}
+
 
 <div class="main-container">
   <div class="cart-container">
     <div class="cart-left">
       <div class="cart-title">
-        <h2>cart summary</h2>
+        <h2>Seu Roteiro</h2>
       </div>
       <div class="cart-items">
         {% if cart_products %}
@@ -120,7 +102,27 @@
     </div>
     <div class="cart-right">
       <div class="right-container">
-        
+        <div class="cart-summary">
+          <!-- Adicione informações adicionais do carrinho, se necessário -->
+      </div>
+      <div class="cart-actions">
+          <h3>Adicionar à Programação</h3>
+          <form id="add-to-schedule-form">
+              <div class="mb-3">
+                  <label for="datepicker" class="form-label">Data:</label>
+                  <input type="text" class="form-control" id="datepicker" name="datepicker" placeholder="Selecione a data">
+              </div>
+              <div class="mb-3">
+                <label for="month" class="form-label">Mês:</label>
+                <input type="text" class="form-control" id="month" name="month" placeholder="Informe o mês">
+              </div>
+              <div class="mb-3">
+                  <label for="num-people" class="form-label">Número de Pessoas:</label>
+                  <input type="number" class="form-control" id="num-people" name="num_people" placeholder="Informe o número de pessoas">
+              </div>
+              <button type="button" class="btn btn-primary" id="add-to-schedule-btn">Enviar à Programação</button>
+          </form>
+      </div>
       </div>
     </div>
   </div>
@@ -148,6 +150,38 @@
             error: function (xhr, status, err) {
                 console.log("Erro na exclusão:", err);
             },
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        // Adicione um ouvinte de evento para o botão "Adicionar ao Cronograma"
+        $("#add-to-schedule-btn").on("click", function () {
+            // Obtenha os valores dos campos do formulário
+            var month = $("#month").val();
+            var numPeople = $("#num-people").val();
+
+            // Verifique se os campos estão preenchidos
+            if (!month || !numPeople) {
+                alert("Por favor, preencha todos os campos antes de enviar.");
+                return;
+            }
+
+            // Crie um objeto com os dados do formulário
+            var formData = {
+                month: month,
+                numPeople: numPeople
+            };
+
+            // Simule o envio dos dados para o backend (pode ser substituído por uma chamada AJAX real)
+            console.log("Dados do formulário enviados:", formData);
+
+            // Limpe os campos após o envio fictício
+            $("#month, #num-people").val("");
+
+            // Remova os elementos do carrinho (cards)
+            $(".cart-items").empty();
         });
     });
 </script>

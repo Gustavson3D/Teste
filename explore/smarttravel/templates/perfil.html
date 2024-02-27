@@ -8,43 +8,54 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="{% static 'css/styles.css' %}"
+      href="{% static 'css/perfil.css' %}"
     />
   </head>
   <body>
-    <h1>Perfil do Usuário</h1>
-    <p><strong>Nome de usuário:</strong> {{ user.username }}</p>
-    <p><strong>Endereço de e-mail:</strong> {{ user.email }}</p>
-    <p><strong>Telefone:</strong> {{ profile.telefone }}</p>
-    <p><strong>Data de registro:</strong> {{ user.date_joined }}</p>
-    <p><strong>Última modificação:</strong> {{ profile.data_modificacao }}</p>
+    <div class="container">
+      <div class="profile-info">
+        <h1>Perfil do Usuário</h1>
+        <p><strong>Nome de usuário:</strong> {{ user.username }}</p>
+        <p><strong>Endereço de e-mail:</strong> {{ user.email }}</p>
+        <p><strong>Telefone:</strong> {{ profile.telefone }}</p>
+        <p><strong>Data de registro:</strong> {{ user.date_joined }}</p>
+      </div>
 
-    <!-- Formulário para atualizar informações do perfil -->
-    <h2>Editar Perfil</h2>
-    <a href="{% url 'atualizar_usuario' %}" class="btn btn-primary">
-      Atualizar Conta
-    </a>
+      <!-- Lado direito reservado para futuras implementações -->
+      <div class="reserved-section text-right">
+        <p>
+          <strong>Última modificação:</strong> {{ profile.data_modificacao }}
+        </p>
 
-    <!-- Formulário para alterar a senha -->
-    <h2>Alterar Senha</h2>
-    <a href="{% url 'atualizar_senha' %}" class="btn btn-primary">
-      Atualizar Senha
-    </a>
+        <!-- Formulário para atualizar informações do perfil -->
+        <h2 class="text-right">Editar Perfil</h2>
+        <a href="{% url 'atualizar_usuario' %}" class="btn btn-primary">
+          Atualizar Conta
+        </a>
 
-    <!-- Condição para mostrar links apenas se o usuário for administrador -->
-    {% if user.is_staff %}
-    <h2>Administração</h2>
-    <a href="{% url 'cadastro_local' %}" class="btn btn-primary">
-      Cadastrar Local
-      <br/>
-    </a>
-    <a href="{% url 'cadastro_cidade' %}" class="btn btn-primary">
-      Cadastrar Cidade
-    </a>
-    <br/>
-    <a href="{% url 'cadastro_administrador' %}" class="btn btn-primary">
-      Cadastrar Administrador
-    </a>
-    {% endif %}
+        <!-- Formulário para alterar a senha -->
+        <h2 class="text-right">Alterar Senha</h2>
+        <a href="{% url 'atualizar_senha' %}" class="btn btn-primary">
+          Atualizar Senha
+        </a>
+
+        <!-- Condição para mostrar links apenas se o usuário for administrador -->
+        {% if user.is_staff %}
+        <div class="admin-section">
+          <h2>Administração</h2>
+          <a href="{% url 'cadastro_local' %}" class="btn btn-primary">
+            Cadastrar Local
+          </a>
+          <a href="{% url 'cadastro_cidade' %}" class="btn btn-primary">
+            Cadastrar Cidade
+          </a>
+          <a href="{% url 'cadastro_administrador' %}" class="btn btn-primary">
+            Cadastrar Administrador
+          </a>
+        </div>
+        {% endif %}
+      </div>
+      <!-- Adicione aqui os elementos do lado direito conforme necessário -->
+    </div>
   </body>
 </html>

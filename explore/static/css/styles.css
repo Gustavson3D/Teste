@@ -33,6 +33,7 @@ body {
 
 /* Estilos dos cards */
 .top-deals {
+    align-items: center;
     display: flex;
     justify-content: center;
     display: inline-block;
@@ -41,11 +42,10 @@ body {
 
 .card {
     /* Seu estilo atual para os cartões */
-    align-items: center;
     border: 1px solid #ddd;
     margin: 10px;
     width: 200px;
-    text-align: center;
+    text-align: left;
     background-color: #f9f9f9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease-in-out;
