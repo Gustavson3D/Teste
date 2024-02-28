@@ -1,374 +1,447 @@
-{% extends 'base.html' %}
-
+{% extends 'base.html' %} 
 {% block content %}
-    <!-- Aqui você pode adicionar mais conteúdo específico da página Home, se necessário -->
-  {% comment %} Navbar {% endcomment %}
-  <nav class="navbar navbar-expand-lg navbar-light bg-blue">
-    <div class="container">
-      <a class="navbar-brand" href="/">
-        <img src="media/images/logo branca_.png" alt="logo" width="200">
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/servicos">Serviços</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/unidades">Unidades</a>
-          </li>
+<!-- Aqui você pode adicionar mais conteúdo específico da página Home, se necessário -->
+{% comment %} Navbar {% endcomment %}
+<nav class="navbar navbar-expand-lg navbar-light bg-blue">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img src="media/images/logo branca_.png" alt="logo" width="200" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/servicos">Serviços</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/unidades">Unidades</a>
+        </li>
 
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              {% if user.is_authenticated %} 
-              Perfil 
-              {% else %} 
-              Log-in 
-              {% endif %}
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              {% if user.is_authenticated %}
-              <li>
-                <a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-              </li>
-              {% else %}
-              <li>
-                <a class="dropdown-item" href="{% url 'login' %}">Login</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="{% url 'cadastro_usuario' %}"
-                  >Cadastre-se</a
-                >
-              </li>
-              {% endif %}
-            </ul>
-          </div>
-          <!-- Adicione mais itens de menu conforme necessário -->
-        </ul>
-        <a href="{% url 'cart_summary' %}" class="btn btn-outline-dark">
-          <i class="bi-cart-fill me-1"></i>
-          Cart
-          <span
-            class="badge bg-dark text-white ms-1 rounded-pill"
-            id="cart_quantity"
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
           >
-            {{ cart|length }}
-          </span></a
+            {% if user.is_authenticated %} Perfil {% else %} Log-in {% endif %}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {% if user.is_authenticated %}
+            <li>
+              <a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li>
+              <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'cadastro_usuario' %}"
+                >Cadastre-se</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+        <!-- Adicione mais itens de menu conforme necessário -->
+      </ul>
+      <a href="{% url 'cart_summary' %}" class="btn btn-outline-dark">
+        <i class="bi-cart-fill me-1"></i>
+        Cart
+        <span
+          class="badge bg-dark text-white ms-1 rounded-pill"
+          id="cart_quantity"
         >
+          {{ cart|length }}
+        </span></a
+      >
+    </div>
+  </div>
+</nav>
+{% comment %} navbar final {% endcomment %}
+
+<!-- banner e frases -->
+<section class="banner overflow-hidden">
+  <div class="slider slider1">
+    <div class="carousel-container">
+      <div class="carousel-slide">
+        <div class="slide-inner">
+          <div
+            class="slide-image"
+            style="background-image: url(media/images/penhasco.jpg)"
+          ></div>
+          <div class="swiper-content1 container">
+            <h1 class="white mb-4">
+              Descubra Lugares Incríveis e Tenha Experiências Únicas
+            </h1>
+          </div>
+          <div class="dot-overlay"></div>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <div class="slide-inner">
+          <div
+            class="slide-image"
+            style="background-image: url(media/images/banner_praia.jpeg)"
+          ></div>
+          <div class="swiper-content1 container">
+            <h1 class="white mb-4">
+              Descubra Lugares Incríveis e Tenha Experiências Únicas
+            </h1>
+          </div>
+          <div class="dot-overlay"></div>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <div class="slide-inner">
+          <div
+            class="slide-image"
+            style="background-image: url(media/images/culinaria_alema.webp)"
+          ></div>
+          <div class="swiper-content1 container">
+            <h1 class="white mb-4">Aprecie a Diversidade da Culinária Local</h1>
+          </div>
+          <div class="dot-overlay"></div>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <div class="slide-inner">
+          <div
+            class="slide-image"
+            style="background-image: url(media/images/banner_cerveja.jpeg)"
+          ></div>
+          <div class="swiper-content1 container">
+            <h1 class="white mb-4">Aprecie a Diversidade da Culinária Local</h1>
+          </div>
+          <div class="dot-overlay"></div>
+        </div>
+      </div>
+      <div class="carousel-slide">
+        <div class="slide-inner">
+          <div
+            class="slide-image"
+            style="background-image: url(media/images/beto_carrero.webp)"
+          ></div>
+          <div class="swiper-content1 container">
+            <h1 class="white mb-4">Torne Sua Viagem Divertida e Memoravél</h1>
+          </div>
+          <div class="dot-overlay"></div>
+        </div>
       </div>
     </div>
-  </nav>
-  {% comment %} navbar final {% endcomment %}
-  
-    <!-- banner e frases -->
-  <section class="banner overflow-hidden">
-    <div class="slider slider1">
-        <div class="carousel-container">
-            <div class="carousel-slide">
-                <div class="slide-inner">
-                    <div class="slide-image" style="background-image:url(media/images/penhasco.jpg)" ></div>
-                    <div class="swiper-content1 container">
-                        <h1 class="white mb-4">Descubra Lugares Incríveis e Tenha Experiências Únicas</h1>
-                    </div>
-                    <div class="dot-overlay"></div>
-                </div> 
-            </div>
-            <div class="carousel-slide">
-                <div class="slide-inner">
-                    <div class="slide-image" style="background-image:url(media/images/banner_praia.jpeg)"></div>
-                    <div class="swiper-content1 container">
-                        <h1 class="white mb-4">Descubra Lugares Incríveis e Tenha Experiências Únicas</h1> 
-                    </div>
-                    <div class="dot-overlay"></div>
-                </div> 
-            </div>
-            <div class="carousel-slide">
-                <div class="slide-inner">
-                    <div class="slide-image" style="background-image:url(media/images/culinaria_alema.webp)"></div>
-                    <div class="swiper-content1 container">
-                        <h1 class="white mb-4">Aprecie a Diversidade da Culinária Local</h1> 
-                    </div>
-                    <div class="dot-overlay"></div>
-                </div> 
-            </div>
-            <div class="carousel-slide">
-                <div class="slide-inner">
-                    <div class="slide-image" style="background-image:url(media/images/banner_cerveja.jpeg)"></div>
-                    <div class="swiper-content1 container">
-                        <h1 class="white mb-4">Aprecie a Diversidade da Culinária Local</h1> 
-                    </div>
-                    <div class="dot-overlay"></div>
-                </div> 
-            </div>
-            <div class="carousel-slide">
-                <div class="slide-inner">
-                    <div class="slide-image" style="background-image:url(media/images/beto_carrero.webp)"></div>
-                    <div class="swiper-content1 container">
-                        <h1 class="white mb-4">Torne Sua Viagem Divertida e Memoravél</h1> 
-                    </div>
-                    <div class="dot-overlay"></div>
-                </div> 
-            </div>
-        </div>
-    </div>
-    <br/>
+  </div>
+  <br />
 </section>
 <!-- fim banner-->
 
 <!-- card banner que fica junto do banner -->
 <div class="form-main">
   <div class="container">
-      <div class="form-content w-100"> 
-          <h3 class="form-title text-center d-inline white">Explore SC</h3>
-          <div class="d-lg-flex align-items-center justify-content-between">
-          </div>
-      </div>
+    <div class="form-content w-100">
+      <h3 class="form-title text-center d-inline white">Explore SC</h3>
+      <div class="d-lg-flex align-items-center justify-content-between"></div>
+    </div>
   </div>
 </div>
 
-{% comment %} Card da cidade {% endcomment %}
-  {% for cidade in cidades %}
-    <section class="top-deals bg-white pt-9">
-        <div class="card" style="width: 18rem; display: inline-block;">
-            <img src="media/{{cidade.imagem}}" class="card-img-top" alt="image" width="200px">
-            <div class="card-body">
-                <h5 class="card-title">{{cidade.nome_cidade}}</h5>
-                <p class="card-text">{{cidade.descricao}}</p>
-                <h4><a class='btn btn-primary' href="/cidade/{{cidade.id}}">Descubra</a></h4>
+{% comment %} Card da cidade {% endcomment %} 
+<div class="top-container">
+    {% for cidade in cidades %}
+        <section class="top-deals bg-white pt-9">
+            <div class="card" style="width: 18rem; display: inline-block">
+                <img src="media/{{cidade.imagem}}" class="card-img-top" alt="image" width="200px" >
+                <div class="card-body">
+                    <h5 class="card-title">{{cidade.nome_cidade}}</h5>
+                    <div>
+                        <p class="card-text">{{cidade.descricao}}</p>
+                    </div>
+                    <h4>
+                        <a class="btn btn-primary" href="/cidade/{{cidade.id}}">Descubra</a>
+                    </h4>
+                </div>
             </div>
-        </div>
-    </section>
-  {% endfor %}
-
-
+        </section>
+    {% endfor %}
+</div>
 
 
 <section class="why-us pt-10 pb-6">
-    <div class="container">
-        <div class="why-us-box pt-9">
-            <div class="row"></div>
-        </div>
+  <div class="container">
+    <div class="why-us-box pt-9">
+      <div class="row"></div>
     </div>
+  </div>
 </section>
 
 {% comment %} Informações (Imagem do por do Sol) {% endcomment %}
-<section class="about-us pb-0" style="background-image: url(media/images/porsol.jpg);"> <!--1600x800-->
-    <div class="container">
-        <div class="about-image-box">
-            <div class="row">
-                <div class="col-lg-7 col-sm-12">
-                    <div class="about-content">
-                        <h4 class="mb-1 white font-weight-normal">Sobre Smart Travel</h4>
-                        <h2 class="white">Momentos Únicos Que Mudarão Sua Experiência de Viajar!</h2>
-                        <p class="mb-2 white">Somos uma plataforma dedicada a tornar sua experiência turística em Santa Catarina mais prática e ágil.
-                            Com apenas alguns cliques, você pode reservar locais, restaurantes, passeios e tudo mais que precisa para sua viagem.
-                            Sua jornada começa aqui, com facilidade e rapidez.</p>
-                        <div class="about-featured mb-0">
-                            <ul>
-                                <li class="white">Facilidade em sua viagem</li>
-                                <li class="white">Reserva de restaurantes</li>
-                                <li class="white">Planejamento de viagens</li>
-                                <li class="white">Reserva de passeios</li>
-                                <li class="white">Sistema ágil e intuitivo</li>
-                                <li class="white">Suporte humanizado ao cliente</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 col-sm-12">
-                    <div class="about-image-desti mt-5">
-                        <img src="media/images/familia_carro.jpg" alt=""> <!--700x700-->
-                    </div>
-                </div>
+<section
+  class="about-us pb-0"
+  style="background-image: url(media/images/porsol.jpg)"
+>
+  <!--1600x800-->
+  <div class="container">
+    <div class="about-image-box">
+      <div class="row">
+        <div class="col-lg-7 col-sm-12">
+          <div class="about-content">
+            <h4 class="mb-1 white font-weight-normal">Sobre Smart Travel</h4>
+            <h2 class="white">
+              Momentos Únicos Que Mudarão Sua Experiência de Viajar!
+            </h2>
+            <p class="mb-2 white">
+              Somos uma plataforma dedicada a tornar sua experiência turística
+              em Santa Catarina mais prática e ágil. Com apenas alguns cliques,
+              você pode reservar locais, restaurantes, passeios e tudo mais que
+              precisa para sua viagem. Sua jornada começa aqui, com facilidade e
+              rapidez.
+            </p>
+            <div class="about-featured mb-0">
+              <ul>
+                <li class="white">Facilidade em sua viagem</li>
+                <li class="white">Reserva de restaurantes</li>
+                <li class="white">Planejamento de viagens</li>
+                <li class="white">Reserva de passeios</li>
+                <li class="white">Sistema ágil e intuitivo</li>
+                <li class="white">Suporte humanizado ao cliente</li>
+              </ul>
             </div>
+          </div>
         </div>
+        <div class="col-lg-5 col-sm-12">
+          <div class="about-image-desti mt-5">
+            <img src="media/images/familia_carro.jpg" alt="" />
+            <!--700x700-->
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="overlay"></div>
+  </div>
+  <div class="overlay"></div>
 </section>
 {% comment %} Final do por do sol {% endcomment %}
 
-
-<br/>
-<br/>
-<br/>
-
+<br />
+<br />
+<br />
 
 {% comment %} Destinos Favoritos {% endcomment %}
 <section class="trending destination pb-6 bg-grey pt-9">
   <div class="container">
-      <div class="section-title text-center mb-5 pb-2 w-50 mx-auto">
-          <h2 class="m-0">Explore os <span>Destinos Favoritos</span></h2>
-          <p class="mb-0">Seja você um amante da natureza, apreciador da gastronomia, explorador de museus ou simplesmente em busca de relaxamento à beira-mar,<p>temos serviços para todos os tipos de viajantes.</p></p>
-      </div>  
-      <div class="trend-box">
-          <div class="price-navtab text-center mb-4">
-              <ul class="nav nav-tabs">
-                  <li class="active"><a data-toggle="tab" href="#historical">Cultura</a></li>
-                  <li><a data-toggle="tab" href="#weekend">Gastronomia</a></li>
-                  <li><a data-toggle="tab" href="#holidays">Natureza</a></li>
-                  <li><a data-toggle="tab" href="#special">Vida Noturna</a></li>
-              </ul>
-          </div>
-          <div class="tab-content">
-              <div class="tab-pane fade in active">
-                  <div class="row">
-                        <div class="col-lg-4 col-md-6 mb-4">
-                          <div class="trend-item">
-                              <div class="trend-image">
-                                  <img src="media/images/museu_floripa.jpg" alt="image">
-                              </div>
-                              <div class="trend-content-main">
-                                  <div class="trend-content">
-                                      <div class="rating-main d-flex align-items-center pb-1">
-                                          <div class="rating">
-                                              <span class="fa fa-star checked"></span>
-                                              <span class="fa fa-star checked"></span>
-                                              <span class="fa fa-star checked"></span>
-                                              <span class="fa fa-star checked"></span>
-                                              <span class="fa fa-star checked"></span>
-                                          </div>
-                                          <span class="ml-2">38 Reviews</span>
-                                      </div>
-                                      <h4><a href="#">Palácio Cruz e Sousa</a></h4>
-                                      <p class="mb-0"><i class="fa fa-eye mr-1"></i> 852 Visitas<i class="fa fa-map-marker mr-1 ml-3"></i>Florianópolis</p>
-                                  </div>
-                                  <div class="trend-last-main">
-                                      <p class="mb-0 trend-para">O Palácio Cruz e Sousa, antigo Palácio Rosado, é a sede do Museu Histórico de Santa Catarina desde 1986</p>
-                                      <div class="trend-last d-flex align-items-center justify-content-between">
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                        </div>
-                  </div>
-              </div>
-          </div>
-      </div>    
+    <div class="section-title text-center mb-5 pb-2 w-50 mx-auto">
+      <h2 class="m-0">Explore os <span>Melhores Destinos</span></h2>
+    </div>
+    
+
   </div>
 </section>
 
+<div class="line_container d-flex justify-content-center">
+    <div class="top-container">
+        <section class="top-deals bg-white pt-9">
+            <div class="card" style="width: 18rem;">
+                <img src="media/imagens/blumenau-Prefeitura_de_Blumenau_noite.jpg" class="card-img-top" alt="image" width="200px" >
+                <div class="card-body">
+                    <h5 class="card-title">Blumenau</h5>
+                    <div>
+                        <p class="card-text">Blumenau é uma encantadora cidade  famosa por sediar a Oktoberfest, a segunda maior festa da cerveja do mundo, a cidade é marcada por sua herança cultural alemã, expressa na arquitetura, gastronomia e eventos tradicionais.</p>
+                    </div>
+                    <h4>
+                        <a class="btn btn-primary" href="/cidade/{{cidade.id}}">Descubra</a>
+                    </h4>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="top-container">
+        <section class="top-deals bg-white pt-9">
+            <div class="card" style="width: 18rem;">
+                <img src="media/imagens/floripa.jpeg" class="card-img-top" alt="image" width="200px" >
+                <div class="card-body">
+                    <h5 class="card-title">Florianópolis</h5>
+                    <div>
+                        <p class="card-text">Florianópolis, a capital do estado de Santa Catarina, encanta com sua beleza natural e diversidade cultural. Conhecida por suas praias deslumbrantes, a cidade é um destino turístico popular que combina modernidade com tradições açorianas.</p>
+                    </div>
+                    <h4>
+                        <a class="btn btn-primary" href="/cidade/{{cidade.id}}">Descubra</a>
+                    </h4>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="top-container">
+        <section class="top-deals bg-white pt-9">
+            <div class="card" style="width: 18rem;">
+                <img src="media/imagens/bal.jpeg" class="card-img-top" alt="image" width="200px" >
+                <div class="card-body">
+                    <h5 class="card-title">Balneário Camboriú</h5>
+                    <div>
+                        <p class="card-text">Balneário Camboriú, é uma cidade que mescla a beleza de suas praias com sua beleza de arquitetura, destacando-se pelos arranha-céus à beira-mar, oferecendo uma atmosfera vibrante e diversas opções de entretenimento.</p>
+                    </div>
+                    <h4>
+                        <a class="btn btn-primary" href="/cidade/{{cidade.id}}">Descubra</a>
+                    </h4>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
 
-<br/>
-<br/>
-<br/>
+<br />
+<br />
+<br />
 
-
-
-  <!-- Rodapé -->
-    <!-- linha horizontal para whatsapp -->
-    <div class="cta-horizon bg-blue pt-4 pb-4">
-      <div class="container d-md-flex align-items-center justify-content-between">
-          <h4 class="mb-0 white">Não encontrou algo e precisa de ajuda?</h4>
-          <a href="#" class="nir-btn-black">Vamos Conversar</a>
-      </div>
+<!-- Rodapé -->
+<!-- linha horizontal para whatsapp -->
+<div class="cta-horizon bg-blue pt-4 pb-4">
+  <div class="container d-md-flex align-items-center justify-content-between">
+    <h4 class="mb-0 white">Não encontrou algo e precisa de ajuda?</h4>
+    <a href="#" class="nir-btn-black">Vamos Conversar</a>
   </div>
-  <!-- footer-->
-  <footer style="background-image:url(media/images/floripa_ponte.webp);" class="pt-10 ">
-      <div class="footer-upper pb-5">
-          <div class="container">
-              <div class="row">
-                  <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-4">
-                      <div class="footer-links">
-                          <img src="media/images/logo branca_.png" alt="logo" width="200">
-                          <p class="mt-3">
-                            Somos uma plataforma que visa a praticidade e agilidade na sua experiência de viagem.
-                          </p>
-                          <ul>
-                              <li><strong>Telefone:</strong> (47) 9967-4794</li>
-                              <li><strong>Endereço:</strong> Blumenau, Santa Catarina</li>
-                              <li><strong>Email:</strong> info@smarttravel.com</li>
-                              <li><strong>Website:</strong> www.smarttravel.com</li>
-                          </ul>
-                      </div>
-                  </div>
-                  
-                  <div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 mb-4">
-                      <div class="footer-links">
-                          <h4 class="white">Serviços</h4>
-                          <ul>
-                              <li><a href="#">Pagamento</a></li>
-                              <li><a href="#">Feedback</a></li>
-                              <li><a href="#">Fale Conosco</a></li>
-                              <li><a href="#">Outros Serviços</a></li>
-                              <li><a href="#">FAQ</a></li>
-                              <li><a href="#">Mapas</a></li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-4">
-                      <div class="footer-links">
-                          <h4 class="white">Newsletter</h4>
-                          <p>Quer ficar por dentro das novidades
-                            Basta se inscrever e enviaremos uma notificação por e-mail.</p>
-                          <div class="newsletter-form">
-                              <form>
-                                  <input type="email" placeholder="Enter your email">
-                                  <input type="submit" class="nir-btn mt-2 w-100" value="Subscribe">
-                              </form>
-                          </div> 
-                      </div>     
-                  </div>
-              </div>
+</div>
+<!-- footer-->
+<footer
+  style="background-image: url(media/images/floripa_ponte.webp)"
+  class="pt-10"
+>
+  <div class="footer-upper pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-4">
+          <div class="footer-links">
+            <img src="media/images/logo branca_.png" alt="logo" width="200" />
+            <p class="mt-3">
+              Somos uma plataforma que visa a praticidade e agilidade na sua
+              experiência de viagem.
+            </p>
+            <ul>
+              <li><strong>Telefone:</strong> (47) 9967-4794</li>
+              <li><strong>Endereço:</strong> Blumenau, Santa Catarina</li>
+              <li><strong>Email:</strong> info@smarttravel.com</li>
+              <li><strong>Website:</strong> www.smarttravel.com</li>
+            </ul>
           </div>
-      </div>
-      <div class="footer-copyright pt-2 pb-2">
-          <div class="container">
-              <div class="copyright-inner d-md-flex align-items-center justify-content-between">
-                  <div class="copyright-text">
-                      <p class="m-0 white">2024 Smart Travel. Todos os direitos reservados.</p>
-                  </div>
-                  <div class="social-links">
-                      <ul>  
-                          <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                          <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                          <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-                          <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
-                      </ul>
-                  </div>
-              </div>    
+        </div>
+
+        <div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 mb-4">
+          <div class="footer-links">
+            <h4 class="white">Serviços</h4>
+            <ul>
+              <li><a href="#">Pagamento</a></li>
+              <li><a href="#">Feedback</a></li>
+              <li><a href="#">Fale Conosco</a></li>
+              <li><a href="#">Outros Serviços</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Mapas</a></li>
+            </ul>
           </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-4">
+          <div class="footer-links">
+            <h4 class="white">Newsletter</h4>
+            <p>
+              Quer ficar por dentro das novidades Basta se inscrever e
+              enviaremos uma notificação por e-mail.
+            </p>
+            <div class="newsletter-form">
+              <form>
+                <input type="email" placeholder="Enter your email" />
+                <input
+                  type="submit"
+                  class="nir-btn mt-2 w-100"
+                  value="Subscribe"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="overlay"></div>
-  </footer>
-  <!-- footer ends -->
+    </div>
+  </div>
+  <div class="footer-copyright pt-2 pb-2">
+    <div class="container">
+      <div
+        class="copyright-inner d-md-flex align-items-center justify-content-between"
+      >
+        <div class="copyright-text">
+          <p class="m-0 white">
+            2024 Smart Travel. Todos os direitos reservados.
+          </p>
+        </div>
+        <div class="social-links">
+          <ul>
+            <li>
+              <a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#"
+                ><i class="fab fa-instagram" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay"></div>
+</footer>
+<!-- footer ends -->
 
-  <script>
-    let slideIndex = 0;
+<script>
+  let slideIndex = 0;
 
-function showSlides() {
-    const slides = document.querySelectorAll('.carousel-slide');
+  function showSlides() {
+    const slides = document.querySelectorAll(".carousel-slide");
     for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = 'none';
+      slides[i].style.display = "none";
     }
     slideIndex++;
-    if (slideIndex > slides.length) { slideIndex = 1 }
-    slides[slideIndex - 1].style.display = 'block';
+    if (slideIndex > slides.length) {
+      slideIndex = 1;
+    }
+    slides[slideIndex - 1].style.display = "block";
     setTimeout(showSlides, 2000); // Troque 2000 por milissegundos desejados entre os slides
-}
+  }
 
-showSlides();
+  showSlides();
 
-  </script>
+document.addEventListener('DOMContentLoaded', function () {
+var descriptions = document.querySelectorAll('.description-container');
+
+descriptions.forEach(function (description) {
+    var button = document.createElement('span');
+    button.className = 'expand-button';
+    button.innerText = 'Leia mais';
+    
+    button.addEventListener('click', function () {
+        description.classList.toggle('expanded');
+        button.innerText = description.classList.contains('expanded') ? 'Leia menos' : 'Leia mais';
+    });
+    
+    description.appendChild(button);
+    });
+});
+</script>
 {% endblock %}

@@ -37,3 +37,77 @@
     margin-top: 2rem;
 }
 
+
+/* Cards */
+.at_top .top-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.at_top .top-deals {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Adiciona o estilo abaixo para ocultar a borda de top-deals */
+.at_top .top-deals::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.at_top .card {
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    margin: 10px;
+    flex: 0 0 calc(20% - 20px); /* Ajuste para 20% para permitir 5 cards por linha */
+    text-align: left;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.at_top .card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.at_top .card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.at_top .card-body {
+    flex: 1;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.at_top .card a {
+    text-decoration: none;
+    color: #000;
+}
+
+.at_top .card-title {
+    min-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.at_top .card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+  

@@ -27,7 +27,6 @@ class Local(models.Model):
     bairro = models.CharField(max_length=254, verbose_name='Bairro')
     rua = models.CharField(max_length=254, verbose_name='Rua')
     telefone = models.CharField(max_length=14, verbose_name='Telefone', blank=True)
-    email = models.EmailField(max_length=254, verbose_name='Email', blank=True, null=True)
     tipo = models.ForeignKey(Categorias, on_delete=models.CASCADE, null=True, blank=True, related_name='locais')
     id = models.AutoField(primary_key=True)
     imagem = models.ImageField(upload_to='locais/', verbose_name='Imagem', blank=True)

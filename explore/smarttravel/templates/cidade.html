@@ -105,29 +105,25 @@
 <br />
 <h1>{{cidade.nome_cidade}}</h1>
 <br />
-
-{% for local in locais %} 
-<section class="top-deals bg-white pt-9">
-  <div class="card" style="width: 18rem; display: inline-block;">
-    <img
-      src="/media/{{local.imagem}}"
-      class="card-img-top"
-      alt="image"
-      width="200px"
-    />
-    <div class="card-body">
-      <h5 class="card-title">{{local.nome_local}}</h5>
-      <p class="card-text"></p>
-      
-      <h4>
-        <a class="btn btn-primary" href="/local/{{local.id}}">Visualizar</a>
-      </h4>
-    </div>
+<div class="at_top">
+  <div class="top-container" id="cardContainer">
+      {% for local in locais %}
+          <section class="top-deals card">
+              <div class="card" style="width: 18rem;">
+                  <img src="/media/{{local.imagem}}" class="card-img-top" alt="image" width="200px" />
+                  <div class="card-body">
+                      <h5 class="card-title">{{local.nome_local}}</h5>
+                      <h4>
+                          <a class="btn btn-primary" href="/local/{{local.id}}">Visualizar</a>
+                      </h4>
+                  </div>
+              </div>
+          </section>
+      {% empty %}
+          <p>Nenhum local encontrado.</p>
+      {% endfor %}
   </div>
-</section>
-{% empty %}
-<p>Nenhum local encontrado.</p>
-{% endfor %}
+</div>
 
 <div class="cta-horizon bg-blue pt-4 pb-4">
   <div class="container d-md-flex align-items-center justify-content-between">
@@ -228,4 +224,24 @@
   <div class="overlay"></div>
 </footer>
 <!-- footer ends -->
+
+<script>
+  window.onload = function () {
+    arrangeCards();
+    window.addEventListener('resize', arrangeCards);
+};
+
+function arrangeCards() {
+    const container = document.querySelector('.at_top .top-container');
+    const cards = container.querySelectorAll('.at_top .card');
+    
+    const containerWidth = container.offsetWidth;
+    const cardWidth = cards[0].offsetWidth;
+    const cardsPerRow = Math.floor(containerWidth / cardWidth);
+    
+    for (let i = 0; i < cards.length; i++) {
+        cards[i].style.flex = `0 0 calc(${100 / cardsPerRow}% - 20px)`;
+    }
+}
+</script>
 {% endblock %}
