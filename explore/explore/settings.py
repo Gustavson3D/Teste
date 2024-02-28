@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'smarttravel',
     'cart',
-    'envia_email',
-    
 ]
 
 MIDDLEWARE = [
@@ -132,6 +130,4 @@ MEDIA_ROOT  = os.path.join(BASE_DIR,'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Email
 
-EMAIL_BACKEND = 'django.core.mail.abckends.console.EmailBackend'

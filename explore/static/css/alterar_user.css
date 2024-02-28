@@ -23,7 +23,19 @@ body {
 
 form {
     margin-top: 20px;
-    margin-right: 25px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
 }
 
 .btn-primary {
